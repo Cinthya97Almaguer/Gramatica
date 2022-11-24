@@ -1,5 +1,5 @@
 Gramatica: Cplusplus
     Programa  -> #Identificador, Numero Librerias
     Librerias -> OperdadorTermino
-    Variables -> ()
-    Listaidentificadores -> Caracter
+    Variables -> (Identificador)?
+    Listaidentificadores -> (Caracter | Numero)

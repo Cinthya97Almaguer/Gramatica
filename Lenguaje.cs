@@ -10,31 +10,58 @@ Requerimiento 3: La primera producion es publica y el resto privadas
 Requerimiento 4: El consttuctor Lexico parametrizado debe validar que la extension del archivo
                  a compilar sea .gen y si no levantar una excepcion
 Requerimiento 5: Resolver la amiguedad de ST y SNT
+                 Recorrer linea por linea el archivo gram para extraer cada nombre de producción
+                 LEER LA LINEA 1 (Read.Line) Y DEPOSITAR EN UN STRING Y GARDARLO EN LA LISTA DE SNT
+                 EL TOKEN ES EL CONTENIDO Y LA CLASIFICACION.
+Requerimiento 6: Agregar el PIzquierdo y PDerecho escapados en la matriz de transiciones.
+                 0 -(\) > 5      
+Requerimietno 7: Implementar el OR y la Cerradura epsilon.
+                    Variables -> (Identificador)?
+                    Listaidentificadores -> (Caracter | Numero)
+                 
 */
 
 namespace Generador
 {
     public class Lenguaje : Sintaxis, IDisposable
     {
+        List<string> listaSNT;  //LISTA DE SIMBOLOS NO TERMINALES 
         public Lenguaje (string nombre) : base(nombre)
         {
-            //Console.WriteLine("Constructor");
+            listaSNT = new List<string>();
         }
 
         public Lenguaje ()
         {
-            //Console.WriteLine("Constructor");
+            listaSNT = new List<string>();
         }
 
         public void Dispose()
         {
-            Console.WriteLine("\nDestructor");
+            //Console.WriteLine("\nDestructor");
             cerrar();
-            GC.SuppressFinalize(this);
+            //GC.SuppressFinalize(this);
+        }
+
+        private bool esSNT(string contenido)
+        {
+            return listaSNT.Contains(contenido);
+            //return true;
+        }
+
+        private void agregarSNT(string contenido)
+        {
+            //Requerimiento 6.
+            
+            listaSNT.Add(contenido);
         }
 
         private void Programa(string produccionPrincipal)
         {
+            agregarSNT("Programa");
+            agregarSNT("Librerias");
+            agregarSNT("Variables");
+            agregarSNT("Listaidentificadores");
             programa.WriteLine("using System;");
             programa.WriteLine("using System.IO;");
             programa.WriteLine("using System.Collections.Generic;");
@@ -77,7 +104,7 @@ namespace Generador
         {
             match("Gramatica");
             match(":");
-            match(Tipos.SNT);
+            match(Tipos.ST);
             match(Tipos.FinProduccion);
         }
 
@@ -107,7 +134,7 @@ namespace Generador
         {
             lenguaje.WriteLine("\t\tprivate void "+getContenido()+"()");
             lenguaje.WriteLine("\t\t{");
-            match(Tipos.SNT);
+            match(Tipos.ST);
             match(Tipos.Produce);
             simbolos();
             match(Tipos.FinProduccion);
@@ -122,19 +149,19 @@ namespace Generador
             if (esTipo(getContenido()))
             {
                 lenguaje.WriteLine("\t\t\tmatch(Tipos." + getContenido() + ");");
-                match(Tipos.SNT);
+                match(Tipos.ST);
+            }
+            else if (esSNT(getContenido()))
+            {
+                lenguaje.WriteLine("\t\t\t" + getContenido() + "();");
+                match(Tipos.ST);
             }
             else if (getClasificacion() == Tipos.ST)
             {
-                lenguaje.WriteLine("\t\t\tmatch(Tipos." + getContenido() + "();");
+                lenguaje.WriteLine("\t\t\tmatch(\"" + getContenido() + "\");");
                 match(Tipos.ST);
             }
-            else if (getClasificacion() == Tipos.SNT)
-            {
-                lenguaje.WriteLine("\t\t\tmatch(Tipos." + getContenido() + "();");
-                match(Tipos.SNT);
-            }
-
+            
             if(getClasificacion() != Tipos.FinProduccion)
             {
                 simbolos();
