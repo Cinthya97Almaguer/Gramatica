@@ -1,5 +1,5 @@
 Archivo: c2.gram
-Fecha: 23/11/2022 09:49:27 a. m.
+Fecha: 24/11/2022 09:32:30 a. m.
 Gramatica ST 
 : ST 
 Cplusplus ST 
@@ -22,9 +22,15 @@ OperdadorTermino ST
 Variables ST 
 -> Produce 
 ( ST 
+Identificador ST 
 ) ST 
+? ST 
 
  FinProduccion 
 Listaidentificadores ST 
 -> Produce 
+( ST 
 Caracter ST 
+| ST 
+Numero ST 
+) ST 
