@@ -147,7 +147,18 @@ namespace Generador
         }
         private void simbolos()
         {
-            if (esTipo(getContenido()))
+            if (getContenido() == "(")
+            {
+                match("(");
+                //QUE ENTRA AQUI EN EL IF SI EL TOKEN ES UN GETTIPO CHECAR EN CLASIFICACION
+                //Y CON GETCONTENIDO
+                lenguaje.WriteLine(tabulacion("if ()"));
+                lenguaje.WriteLine(tabulacion("{"));
+                simbolos();
+                match(")");
+                lenguaje.WriteLine(tabulacion("}"));
+            }
+            else if (esTipo(getContenido()))
             {
                 lenguaje.WriteLine(tabulacion("match(Tipos." + getContenido() + ");"));
                 match(Tipos.ST);
@@ -163,7 +174,7 @@ namespace Generador
                 match(Tipos.ST);
             }
             
-            if(getClasificacion() != Tipos.FinProduccion)
+            if(getClasificacion() != Tipos.FinProduccion && getContenido() != ")")
             {
                 simbolos();
             }

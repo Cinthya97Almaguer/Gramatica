@@ -1,5 +1,5 @@
 Archivo: c2.gram
-Fecha: 24/11/2022 09:32:30 a. m.
+Fecha: 25/11/2022 09:24:14 a. m.
 Gramatica ST 
 : ST 
 Cplusplus ST 
@@ -16,7 +16,19 @@ Librerias ST
  FinProduccion 
 Librerias ST 
 -> Produce 
-OperdadorTermino ST 
+# ST 
+include ST 
+< ST 
+identificador ST 
+( ST 
+. ST 
+h ST 
+) ST 
+? ST 
+> ST 
+Librerias ST 
+? ST 
+; ST 
 
  FinProduccion 
 Variables ST 
@@ -24,13 +36,8 @@ Variables ST
 ( ST 
 Identificador ST 
 ) ST 
-? ST 
 
  FinProduccion 
 Listaidentificadores ST 
 -> Produce 
-( ST 
-Caracter ST 
-| ST 
 Numero ST 
-) ST 
