@@ -15,8 +15,8 @@ Requerimiento 5: Resolver la amiguedad de ST y SNT
                  EL TOKEN ES EL CONTENIDO Y LA CLASIFICACION.
 Requerimiento 6: Agregar el PIzquierdo y PDerecho escapados en la matriz de transiciones.
                  0 -(\) > 5      
-Requerimietno 7: Implementar el OR y la Cerradura epsilon.
-                    Variables -> (Identificador)?
+Requerimietno 7: Implementar el 
+                    Variables -> if (Identificador)
                     Listaidentificadores -> (Caracter | Numero)
                  
 */
@@ -26,6 +26,8 @@ namespace Generador
     public class Lenguaje : Sintaxis, IDisposable
     {
         int tabulaciones = 0;
+        int contador = 0;
+        string primeraProduccion = "";
         List<string> listaSNT;  //LISTA DE SIMBOLOS NO TERMINALES 
         public Lenguaje (string nombre) : base(nombre)
         {
@@ -91,16 +93,17 @@ namespace Generador
             programa.WriteLine("\t\t}");
             programa.WriteLine("\t}");
         }
-
         public void gramatica()
         {
             cabecera();
-            Programa("programa");
+            Programa(primeraProduccion);
+            //Console.WriteLine(primeraProduccion); 
             cabeceraLenguaje();
             listaProducciones();
             lenguaje.WriteLine(tabulacion("}"));
             lenguaje.WriteLine(tabulacion("}"));
         }
+        
         private void cabecera()
         {
             match("Gramatica");
@@ -133,7 +136,16 @@ namespace Generador
         
         private void listaProducciones()
         {
-            lenguaje.WriteLine(tabulacion("private void "+getContenido()+"()"));
+            if (contador == 0)
+            {
+                primeraProduccion = getContenido();
+                Console.WriteLine(primeraProduccion); 
+                lenguaje.WriteLine(tabulacion("public void "+getContenido()+"()"));
+                contador++;
+            }else
+            {
+                lenguaje.WriteLine(tabulacion("private void "+getContenido()+"()"));
+            }
             lenguaje.WriteLine(tabulacion("{"));
             match(Tipos.ST);
             match(Tipos.Produce);
@@ -207,6 +219,8 @@ namespace Generador
             }
             return false;
         }
+
+        
 
         private string tabulacion(string contenido)
         {
