@@ -4,9 +4,9 @@ using System.Collections.Generic;
 /*
 X - Requerimiento 1: Construir un metodo para escribir en el archivo Lenguaje.cs identando el codigo
                  { -> Incrementa una tabulador } -> Decrementa un tabulador
-Requerimiento 2: Declarar un atributo "primera produccion" de tipo string y actualizarlo con 
+X - Requerimiento 2: Declarar un atributo "primera produccion" de tipo string y actualizarlo con 
                  la primera produccion de la gramatica 
-Requerimiento 3: La primera producion es publica y el resto privadas
+X - Requerimiento 3: La primera producion es publica y el resto privadas
 Requerimiento 4: El consttuctor Lexico parametrizado debe validar que la extension del archivo
                  a compilar sea .gen y si no levantar una excepcion
 Requerimiento 5: Resolver la amiguedad de ST y SNT
@@ -59,7 +59,7 @@ namespace Generador
             listaSNT.Add(contenido);
         }
 
-        private void Programa(string produccionPrincipal)
+        private void Programa(string primeraProduccion)
         {
             agregarSNT("Programa");
             agregarSNT("Librerias");
@@ -82,7 +82,7 @@ namespace Generador
             programa.WriteLine("\t\t\t\tusing (Lenguaje a = new Lenguaje())");
             programa.WriteLine("\t\t\t\t{");
             //REQUERIMIENTO 2
-            programa.WriteLine("\t\t\t\t\ta." + produccionPrincipal + "();");
+            programa.WriteLine("\t\t\t\t\ta." + primeraProduccion + "();");
             programa.WriteLine("\t\t\t\t}");
             programa.WriteLine("\t\t\t}");
             programa.WriteLine("\t\t\tcatch (Exception e)");
@@ -96,6 +96,7 @@ namespace Generador
         public void gramatica()
         {
             cabecera();
+            primeraProduccion = getContenido();
             Programa(primeraProduccion);
             //Console.WriteLine(primeraProduccion); 
             cabeceraLenguaje();
@@ -138,8 +139,8 @@ namespace Generador
         {
             if (contador == 0)
             {
-                primeraProduccion = getContenido();
-                Console.WriteLine(primeraProduccion); 
+                //primeraProduccion = getContenido();
+                //Console.WriteLine(primeraProduccion); 
                 lenguaje.WriteLine(tabulacion("public void "+getContenido()+"()"));
                 contador++;
             }else
