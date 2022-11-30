@@ -52,7 +52,8 @@ namespace Generador
         {
             linea = 1;
             string pathLog = Path.ChangeExtension(nombre, ".log");
-            /*GetExtension(String):
+/*https://learn.microsoft.com/es-es/dotnet/api/system.io.path.getextension?view=net-7.0
+        GetExtension(String):
 Devuelve la extensión (incluido el punto ".") de la cadena de ruta de acceso especificada.*/
             string existeGram = Path.GetExtension(nombre);
             //Console.WriteLine(existeGram);

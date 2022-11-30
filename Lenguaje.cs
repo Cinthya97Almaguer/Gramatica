@@ -7,14 +7,14 @@ X - Requerimiento 1: Construir un metodo para escribir en el archivo Lenguaje.cs
 X - Requerimiento 2: Declarar un atributo "primera produccion" de tipo string y actualizarlo con 
                  la primera produccion de la gramatica 
 X - Requerimiento 3: La primera producion es publica y el resto privadas
-Requerimiento 4: El consttuctor Lexico parametrizado debe validar que la extension del archivo
-                 a compilar sea .gram y si no levantar una excepcion
+X - Requerimiento 4: El consttuctor Lexico parametrizado debe validar que la extension del archivo
+                 a compilar sea .gen y si no levantar una excepcion
 Requerimiento 5: Resolver la amiguedad de ST y SNT
                  Recorrer linea por linea el archivo gram para extraer cada nombre de producción
                  LEER LA LINEA 1 (Read.Line) Y DEPOSITAR EN UN STRING Y GARDARLO EN LA LISTA DE SNT
                  EL TOKEN ES EL CONTENIDO Y LA CLASIFICACION.
 Requerimiento 6: Agregar el PIzquierdo y PDerecho escapados en la matriz de transiciones.
-                 0 -(\) > 5      
+                 0 -(\) > 5      --LEXICO
 Requerimietno 7: Implementar el 
                     Variables -> if (Identificador)
                     Listaidentificadores -> (Caracter | Numero)
@@ -54,7 +54,7 @@ namespace Generador
 
         private void agregarSNT(string contenido)
         {
-            //Requerimiento 6.
+            //Requerimiento 5.
             
             listaSNT.Add(contenido);
         }
@@ -221,8 +221,6 @@ namespace Generador
             }
             return false;
         }
-
-        
 
         private string tabulacion(string contenido)
         {
