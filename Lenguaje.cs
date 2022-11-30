@@ -8,7 +8,7 @@ X - Requerimiento 2: Declarar un atributo "primera produccion" de tipo string y 
                  la primera produccion de la gramatica 
 X - Requerimiento 3: La primera producion es publica y el resto privadas
 Requerimiento 4: El consttuctor Lexico parametrizado debe validar que la extension del archivo
-                 a compilar sea .gen y si no levantar una excepcion
+                 a compilar sea .gram y si no levantar una excepcion
 Requerimiento 5: Resolver la amiguedad de ST y SNT
                  Recorrer linea por linea el archivo gram para extraer cada nombre de producción
                  LEER LA LINEA 1 (Read.Line) Y DEPOSITAR EN UN STRING Y GARDARLO EN LA LISTA DE SNT
@@ -96,6 +96,7 @@ namespace Generador
         public void gramatica()
         {
             cabecera();
+            //REQUERIMIENTO 2
             primeraProduccion = getContenido();
             Programa(primeraProduccion);
             //Console.WriteLine(primeraProduccion); 
