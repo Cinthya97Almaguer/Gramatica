@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 /*
 X - Requerimiento 1: Construir un metodo para escribir en el archivo Lenguaje.cs identando el codigo
                  { -> Incrementa una tabulador } -> Decrementa un tabulador
@@ -63,12 +64,23 @@ namespace Generador
         private void leerArchivo()
         {
 //https://learn.microsoft.com/es-es/dotnet/csharp/programming-guide/file-system/how-to-read-a-text-file-one-line-at-a-time
+//https://learn.microsoft.com/es-es/dotnet/api/system.io.file.readalllines?view=net-7.0
             int counter = 0;
-            // Read the file and display it line by line.  
-            foreach (string line in System.IO.File.ReadLines(@"C:\Users\Cinthya Almaguer\OneDrive\Documentos\Visual Studio 2022\Generador\c2.gram"))
+            string nuevo;
+            // Read the file and display it line by line. 
+            string[] readText = System.IO.File.ReadAllLines(@"C:\Users\Cinthya Almaguer\OneDrive\Documentos\Visual Studio 2022\Generador\c2.gram");
+            //Console.WriteLine(readText.Length.ToString());
+            foreach (string line in readText)
             {
-                
-                System.Console.WriteLine(line);
+                //System.Console.WriteLine(line+counter);
+                if (counter != 0)
+                {
+                    if (line.Contains("->"))
+                    {
+                        nuevo = line;
+                        Console.WriteLine(nuevo);
+                    }
+                }
                 counter++;
             }
             //System.Console.WriteLine("There were {0} lines.", counter);
