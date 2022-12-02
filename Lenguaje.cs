@@ -1,6 +1,7 @@
 //BRIONES ALMAGUER CINTHYA CRISTINA
 using System;
 using System.Collections.Generic;
+using System.IO;
 /*
 X - Requerimiento 1: Construir un metodo para escribir en el archivo Lenguaje.cs identando el codigo
                  { -> Incrementa una tabulador } -> Decrementa un tabulador
@@ -29,12 +30,12 @@ namespace Generador
         int contador = 0;
         string primeraProduccion = "";
         List<string> listaSNT;  //LISTA DE SIMBOLOS NO TERMINALES 
-        public Lenguaje (string nombre) : base(nombre)
+        public Lenguaje(string nombre) : base(nombre)
         {
             listaSNT = new List<string>();
         }
 
-        public Lenguaje ()
+        public Lenguaje()
         {
             listaSNT = new List<string>();
         }
@@ -55,8 +56,24 @@ namespace Generador
         private void agregarSNT(string contenido)
         {
             //Requerimiento 5.
-            
+            leerArchivo();
             listaSNT.Add(contenido);
+        }
+
+        private void leerArchivo()
+        {
+//https://learn.microsoft.com/es-es/dotnet/csharp/programming-guide/file-system/how-to-read-a-text-file-one-line-at-a-time
+            int counter = 0;
+            // Read the file and display it line by line.  
+            foreach (string line in System.IO.File.ReadLines(@"C:\Users\Cinthya Almaguer\OneDrive\Documentos\Visual Studio 2022\Generador\c2.gram"))
+            {
+                
+                System.Console.WriteLine(line);
+                counter++;
+            }
+            //System.Console.WriteLine("There were {0} lines.", counter);
+            //Suspend the screen.  
+            //System.Console.ReadLine();
         }
 
         private void Programa(string primeraProduccion)
@@ -105,7 +122,7 @@ namespace Generador
             lenguaje.WriteLine(tabulacion("}"));
             lenguaje.WriteLine(tabulacion("}"));
         }
-        
+
         private void cabecera()
         {
             match("Gramatica");
@@ -135,18 +152,19 @@ namespace Generador
             lenguaje.WriteLine(tabulacion("}"));
 
         }
-        
+
         private void listaProducciones()
         {
             if (contador == 0)
             {
                 //primeraProduccion = getContenido();
                 //Console.WriteLine(primeraProduccion); 
-                lenguaje.WriteLine(tabulacion("public void "+getContenido()+"()"));
+                lenguaje.WriteLine(tabulacion("public void " + getContenido() + "()"));
                 contador++;
-            }else
+            }
+            else
             {
-                lenguaje.WriteLine(tabulacion("private void "+getContenido()+"()"));
+                lenguaje.WriteLine(tabulacion("private void " + getContenido() + "()"));
             }
             lenguaje.WriteLine(tabulacion("{"));
             match(Tipos.ST);
@@ -187,8 +205,8 @@ namespace Generador
                 lenguaje.WriteLine(tabulacion("match(\"" + getContenido() + "\");"));
                 match(Tipos.ST);
             }
-            
-            if(getClasificacion() != Tipos.FinProduccion && getContenido() != ")")
+
+            if (getClasificacion() != Tipos.FinProduccion && getContenido() != ")")
             {
                 simbolos();
             }
@@ -217,27 +235,27 @@ namespace Generador
                 case "Zona":
                 case "Condicion":
                 case "Ciclo":
-                     return true;
+                    return true;
             }
             return false;
         }
 
         private string tabulacion(string contenido)
         {
-            string cadena="";
+            string cadena = "";
             if (contenido == "}")
             {
                 tabulaciones--;
             }
             for (int i = 0; i < tabulaciones; i++)
             {
-                cadena=("\t")+cadena;
+                cadena = ("\t") + cadena;
             }
             if (contenido == "{")
             {
                 tabulaciones++;
             }
-            return cadena+contenido;
+            return cadena + contenido;
 
         }
     }
