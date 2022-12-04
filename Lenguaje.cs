@@ -1,8 +1,10 @@
 //BRIONES ALMAGUER CINTHYA CRISTINA
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.IO;
-using System.Text;
+using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 /*
 X - Requerimiento 1: Construir un metodo para escribir en el archivo Lenguaje.cs identando el codigo
                  { -> Incrementa una tabulador } -> Decrementa un tabulador
@@ -64,28 +66,23 @@ namespace Generador
         private void leerArchivo()
         {
 //https://learn.microsoft.com/es-es/dotnet/csharp/programming-guide/file-system/how-to-read-a-text-file-one-line-at-a-time
-//https://learn.microsoft.com/es-es/dotnet/api/system.io.file.readalllines?view=net-7.0
-            int counter = 0;
-            string nuevo;
-            // Read the file and display it line by line. 
             string[] readText = System.IO.File.ReadAllLines(@"C:\Users\Cinthya Almaguer\OneDrive\Documentos\Visual Studio 2022\Generador\c2.gram");
-            //Console.WriteLine(readText.Length.ToString());
             foreach (string line in readText)
             {
-                //System.Console.WriteLine(line+counter);
-                if (counter != 0)
+                if (line.Contains("->"))
                 {
-                    if (line.Contains("->"))
-                    {
-                        nuevo = line;
-                        Console.WriteLine(nuevo);
-                    }
+//https://learn.microsoft.com/es-es/dotnet/standard/base-types/divide-up-strings#code-try-3
+                    string[] nuevo = line.Split("->",StringSplitOptions.RemoveEmptyEntries); 
+/*String.Split ayudarle a dividir una cadena en un grupo de subcadenas en 
+función de uno o más caracteres delimitadores que especifique. 
+Para omitir las subcadenas vacías de la matriz resultante, puede llamar a la sobrecarga 
+Split(Char[], StringSplitOptions) y especificar StringSplitOptions.RemoveEmptyEntries 
+para el parámetro options.*/
+                    string agregar = nuevo[0];
+                    agregar = agregar.Replace(" ", "");
+                    Console.WriteLine(agregar);
                 }
-                counter++;
             }
-            //System.Console.WriteLine("There were {0} lines.", counter);
-            //Suspend the screen.  
-            //System.Console.ReadLine();
         }
 
         private void Programa(string primeraProduccion)

@@ -1,6 +1,5 @@
 //BRIONES ALMAGUER CINTHYA CRISTINA
-using
-System.IO;
+using System.IO;
 
 namespace Generador
 {
@@ -16,8 +15,9 @@ namespace Generador
 
         int[,] TRAND = new int[,]
         {
+        //  WS, -, >, L, EOL, Lambda
             {0,1,5,3,4,5},
-            {F,F,2,F,F,5},
+            {F,F,2,F,F,F},
             {F,F,F,F,F,F},
             {F,F,F,3,F,F},
             {F,F,F,F,F,F},
