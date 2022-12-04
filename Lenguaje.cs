@@ -59,13 +59,8 @@ namespace Generador
         private void agregarSNT(string contenido)
         {
             //Requerimiento 5.
-            leerArchivo();
-            listaSNT.Add(contenido);
-        }
-
-        private void leerArchivo()
-        {
-//https://learn.microsoft.com/es-es/dotnet/csharp/programming-guide/file-system/how-to-read-a-text-file-one-line-at-a-time
+            //leerArchivo();
+            //https://learn.microsoft.com/es-es/dotnet/csharp/programming-guide/file-system/how-to-read-a-text-file-one-line-at-a-time
             string[] readText = System.IO.File.ReadAllLines(@"C:\Users\Cinthya Almaguer\OneDrive\Documentos\Visual Studio 2022\Generador\c2.gram");
             foreach (string line in readText)
             {
@@ -81,16 +76,15 @@ para el parámetro options.*/
                     string agregar = nuevo[0];
                     agregar = agregar.Replace(" ", "");
                     Console.WriteLine(agregar);
+                    listaSNT.Add(agregar);
                 }
             }
         }
 
+
         private void Programa(string primeraProduccion)
         {
-            agregarSNT("Programa");
-            agregarSNT("Librerias");
-            agregarSNT("Variables");
-            agregarSNT("Listaidentificadores");
+            agregarSNT(getContenido());
             programa.WriteLine("using System;");
             programa.WriteLine("using System.IO;");
             programa.WriteLine("using System.Collections.Generic;");
