@@ -15,7 +15,7 @@ namespace Generador
 
         int[,] TRAND = new int[,]
         {
-        //  WS, -, >, L, EOL, Lambda, (, ), \
+         //  WS, -, >, L, EOL, Lambda, (, ), \
         //   0, 1, 5, 3,  4,     5 
         //   0, 1, 8, 3,   4,    8  , 8, 8, 5
         //   0 -> \ -> 5 -> (|)| -> 6|7| -> lambda -> F
@@ -25,7 +25,7 @@ namespace Generador
             {F, F, F, F, F, F, F, F, F}, //ESTADO 2
             {F, F, F, 3, F, F, F, F, F}, //ESTADO 3
             {F, F, F, F, F, F, F, F, F}, //ESTADO 4
-            {F, F, F, F, F, F, F, 6, 7}, //ESTADO 5
+            {F, F, F, F, F, F, 6, 7, F}, //ESTADO 5
             {F, F, F, F, F, F, F, F, F}, //ESTADO 6
             {F, F, F, F, F, F, F, F, F}, //ESTADO 7
             {F, F, F, F, F, F, F, F, F}, //ESTADO 8
@@ -123,11 +123,11 @@ Devuelve la extensión (incluido el punto ".") de la cadena de ruta de acceso es
                     break;
                 //( 8
                 case 6:
-                    setClasificacion(Tipos.PIzquierdo);
+                    setClasificacion(Tipos.PDerecho);
                     break;
                 //) 8
                 case 7:
-                    setClasificacion(Tipos.PDerecho);
+                    setClasificacion(Tipos.PIzquierdo);
                     break;
                 // \ 5
                 case 8:
