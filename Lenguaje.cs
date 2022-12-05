@@ -59,8 +59,8 @@ namespace Generador
         private void agregarSNT(string contenido)
         {
 //-----------------------REQUERIMIENTO:5---------------------
-            //leerArchivo();
-            //https://learn.microsoft.com/es-es/dotnet/csharp/programming-guide/file-system/how-to-read-a-text-file-one-line-at-a-time
+//leerArchivo();
+//https://learn.microsoft.com/es-es/dotnet/csharp/programming-guide/file-system/how-to-read-a-text-file-one-line-at-a-time
             string[] readText = System.IO.File.ReadAllLines(@"C:\Users\Cinthya Almaguer\OneDrive\Documentos\Visual Studio 2022\Generador\c2.gram");
             foreach (string line in readText)
             {
@@ -99,7 +99,7 @@ para el parámetro options.*/
             programa.WriteLine("\t\t{");
             programa.WriteLine("\t\t\ttry");
             programa.WriteLine("\t\t\t{");
-            programa.WriteLine("\t\t\t\tusing (Lenguaje a = new Lenguaje())");
+            programa.WriteLine("\t\t\t\tusing (Lenguaje a = new Lenguaje(\"prueba.gen\"))");
             programa.WriteLine("\t\t\t\t{");
 //-----------------------REQUERIMIENTO:2---------------------
             programa.WriteLine("\t\t\t\t\ta." + primeraProduccion + "();");
