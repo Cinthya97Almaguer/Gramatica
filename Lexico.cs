@@ -15,13 +15,20 @@ namespace Generador
 
         int[,] TRAND = new int[,]
         {
-        //  WS, -, >, L, EOL, Lambda
-            {0,1,5,3,4,5},
-            {F,F,2,F,F,F},
-            {F,F,F,F,F,F},
-            {F,F,F,3,F,F},
-            {F,F,F,F,F,F},
-            {F,F,F,F,F,F},
+        //  WS, -, >, L, EOL, Lambda, (, ), \
+        //   0, 1, 5, 3,  4,     5 
+        //   0, 1, 8, 3,   4,    8  , 8, 8, 5
+        //   0 -> \ -> 5 -> (|)| -> 6|7| -> lambda -> F
+        //   0 -> lambda -> 8 -> lambda -> F
+            {0, 1, 8, 3, 4, 8, 5, 8, 8}, //ESTADO 0
+            {F, F, 2, F, F, F, F, F, F}, //ESTADO 1
+            {F, F, F, F, F, F, F, F, F}, //ESTADO 2
+            {F, F, F, 3, F, F, F, F, F}, //ESTADO 3
+            {F, F, F, F, F, F, F, F, F}, //ESTADO 4
+            {F, F, F, F, F, F, F, 6, 7}, //ESTADO 5
+            {F, F, F, F, F, F, F, F, F}, //ESTADO 6
+            {F, F, F, F, F, F, F, F, F}, //ESTADO 7
+            {F, F, F, F, F, F, F, F, F}, //ESTADO 8
         };
         public Lexico()
         {
@@ -94,6 +101,9 @@ Devuelve la extensión (incluido el punto ".") de la cadena de ruta de acceso es
 
         private void clasifica(int estado)
         {
+            //  WS, -, >, L, EOL, Lambda, (, ), \
+            //   0, 1, 5, 3,  4,     5 
+            //   0, 1, 8, 3,   4,    8  , 8, 8, 5
             switch (estado)
             {
                 case 1:
@@ -111,20 +121,42 @@ Devuelve la extensión (incluido el punto ".") de la cadena de ruta de acceso es
                 case 5:
                     setClasificacion(Tipos.ST);
                     break;
+                //( 8
+                case 6:
+                    setClasificacion(Tipos.PDerecho);
+                    break;
+                //) 8
+                case 7:
+                    setClasificacion(Tipos.PIzquierdo);
+                    break;
+                // \ 5
+                case 8:
+                    setClasificacion(Tipos.ST);
+                    break;               
             }
         }
         private int columna(char c)
         {
+            //  WS, -, >, L, EOL, Lambda, (, ), \
+            //   0, 1, 5, 3,  4,     5 
+            //   0, 1, 8, 3,  4,     8  , 8, 8, 5
+            //   0, 1, 2, 3,  4,     5  , 6, 7, 8
             if (c == 10)
                 return 4;
             else if (char.IsWhiteSpace(c))
-                return 0;
+                return 0;    
             else if (c == '-')
                 return 1;
             else if (c == '>')
                 return 2;
             else if (char.IsLetter(c))
                 return 3;
+            else if (c == '(')
+                return 6;
+            else if (c == ')')
+                return 7;
+            else if (c == '\\')
+                return 8;
             else
                 return 5;
         }
