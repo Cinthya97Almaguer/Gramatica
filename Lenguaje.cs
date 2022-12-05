@@ -58,7 +58,7 @@ namespace Generador
 
         private void agregarSNT(string contenido)
         {
-            //Requerimiento 5.
+//-----------------------REQUERIMIENTO:5---------------------
             //leerArchivo();
             //https://learn.microsoft.com/es-es/dotnet/csharp/programming-guide/file-system/how-to-read-a-text-file-one-line-at-a-time
             string[] readText = System.IO.File.ReadAllLines(@"C:\Users\Cinthya Almaguer\OneDrive\Documentos\Visual Studio 2022\Generador\c2.gram");
@@ -101,7 +101,7 @@ para el parámetro options.*/
             programa.WriteLine("\t\t\t{");
             programa.WriteLine("\t\t\t\tusing (Lenguaje a = new Lenguaje())");
             programa.WriteLine("\t\t\t\t{");
-            //REQUERIMIENTO 2
+//-----------------------REQUERIMIENTO:2---------------------
             programa.WriteLine("\t\t\t\t\ta." + primeraProduccion + "();");
             programa.WriteLine("\t\t\t\t}");
             programa.WriteLine("\t\t\t}");
@@ -116,7 +116,7 @@ para el parámetro options.*/
         public void gramatica()
         {
             cabecera();
-            //REQUERIMIENTO 2
+//-----------------------REQUERIMIENTO:2---------------------
             primeraProduccion = getContenido();
             Programa(primeraProduccion);
             //Console.WriteLine(primeraProduccion); 
@@ -158,6 +158,7 @@ para el parámetro options.*/
 
         private void listaProducciones()
         {
+//-----------------------REQUERIMIENTO:3---------------------
             if (contador == 0)
             {
                 //primeraProduccion = getContenido();
@@ -182,15 +183,24 @@ para el parámetro options.*/
         }
         private void simbolos()
         {
-            if (getContenido() == "(")
+//-----------------------REQUERIMIENTO:7---------------------            
+            if (getContenido() == "\\(")
             {
-                match("(");
-                //QUE ENTRA AQUI EN EL IF SI EL TOKEN ES UN GETTIPO CHECAR EN CLASIFICACION
+                match("\\(");
+                //QUE ENTRA AQUI EN EL IF SI EL TOKEN ES UN ESTIPO CHECAR EN CLASIFICACION
                 //Y CON GETCONTENIDO
-                lenguaje.WriteLine(tabulacion("if ()"));
+                if(esTipo(getContenido()))
+                {
+                    lenguaje.WriteLine(tabulacion("if (getClasificacion() == Tipos." + getContenido() + ")"));
+                }
+                else
+                {
+                    lenguaje.WriteLine(tabulacion("if (getContenido() == \"" + getContenido() + "\")"));
+                }
+                //lenguaje.WriteLine(tabulacion("if ()"));
                 lenguaje.WriteLine(tabulacion("{"));
                 simbolos();
-                match(")");
+                match("\\)");
                 lenguaje.WriteLine(tabulacion("}"));
             }
             else if (esTipo(getContenido()))
@@ -209,7 +219,7 @@ para el parámetro options.*/
                 match(Tipos.ST);
             }
 
-            if (getClasificacion() != Tipos.FinProduccion && getContenido() != ")")
+            if (getClasificacion() != Tipos.FinProduccion && getContenido() != "\\)")
             {
                 simbolos();
             }
@@ -242,7 +252,7 @@ para el parámetro options.*/
             }
             return false;
         }
-
+//-----------------------REQUERIMIENTO:1---------------------
         private string tabulacion(string contenido)
         {
             string cadena = "";

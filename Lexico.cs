@@ -15,6 +15,7 @@ namespace Generador
 
         int[,] TRAND = new int[,]
         {
+//-----------------------REQUERIMIENTO:6---------------------
          //  WS, -, >, L, EOL, Lambda, (, ), \
         //   0, 1, 5, 3,  4,     5 
         //   0, 1, 8, 3,   4,    8  , 8, 8, 5
@@ -123,11 +124,11 @@ Devuelve la extensión (incluido el punto ".") de la cadena de ruta de acceso es
                     break;
                 //( 8
                 case 6:
-                    setClasificacion(Tipos.PDerecho);
+                    setClasificacion(Tipos.PIzquierdo);
                     break;
                 //) 8
                 case 7:
-                    setClasificacion(Tipos.PIzquierdo);
+                    setClasificacion(Tipos.PDerecho);
                     break;
                 // \ 5
                 case 8:
@@ -151,14 +152,13 @@ Devuelve la extensión (incluido el punto ".") de la cadena de ruta de acceso es
                 return 2;
             else if (char.IsLetter(c))
                 return 3;
+            else if (c == '\\')
+                return 8;
             else if (c == '(')
                 return 6;
             else if (c == ')')
                 return 7;
-            else if (c == '\\')
-                return 8;
-            else
-                return 5;
+            return 5;
         }
         public void NextToken()
         {
