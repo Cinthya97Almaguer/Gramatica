@@ -20,7 +20,7 @@ namespace Generador
         //   0, 1, 8, 3,   4,    8  , 8, 8, 5
         //   0 -> \ -> 5 -> (|)| -> 6|7| -> lambda -> F
         //   0 -> lambda -> 8 -> lambda -> F
-            {0, 1, 8, 3, 4, 8, 5, 8, 8}, //ESTADO 0
+            {0, 1, 8, 3, 4, 8, 8, 8, 5}, //ESTADO 0
             {F, F, 2, F, F, F, F, F, F}, //ESTADO 1
             {F, F, F, F, F, F, F, F, F}, //ESTADO 2
             {F, F, F, 3, F, F, F, F, F}, //ESTADO 3
@@ -123,11 +123,11 @@ Devuelve la extensión (incluido el punto ".") de la cadena de ruta de acceso es
                     break;
                 //( 8
                 case 6:
-                    setClasificacion(Tipos.PDerecho);
+                    setClasificacion(Tipos.PIzquierdo);
                     break;
                 //) 8
                 case 7:
-                    setClasificacion(Tipos.PIzquierdo);
+                    setClasificacion(Tipos.PDerecho);
                     break;
                 // \ 5
                 case 8:

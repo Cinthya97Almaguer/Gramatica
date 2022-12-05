@@ -75,7 +75,7 @@ Split(Char[], StringSplitOptions) y especificar StringSplitOptions.RemoveEmptyEn
 para el parámetro options.*/
                     string agregar = nuevo[0];
                     agregar = agregar.Replace(" ", "");
-                    Console.WriteLine(agregar);
+                    //Console.WriteLine(agregar);
                     listaSNT.Add(agregar);
                 }
             }
