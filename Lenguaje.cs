@@ -262,7 +262,7 @@ para el parámetro options.*/
             }
             for (int i = 0; i < tabulaciones; i++)
             {
-                cadena = ("\t") + cadena;
+                cadena = ("    ") + cadena;
             }
             if (contenido == "{")
             {

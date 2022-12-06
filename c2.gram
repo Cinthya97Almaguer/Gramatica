@@ -3,8 +3,8 @@ Gramatica: cplusplus
     Main      -> TipoDato main() BloqueInstrucciones
     Librerias -> #include<Identificador.h>
     Variables -> \(Identificador\)
-    Printf -> printf(\(Cadena\))
+    Printf -> printf(\(Cadena\));
     Scanf -> scanf(\(Cadena\))
     BloqueInstrucciones -> {ListaInstrucciones}
-    ListaInstrucciones -> Instruccion \(;ListaInstrucciones\)
+    ListaInstrucciones -> Instruccion \(Main ListaInstrucciones\)
     Instruccion -> Printf (Scanf)

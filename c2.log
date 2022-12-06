@@ -1,5 +1,5 @@
 Archivo: c2.gram
-Fecha: 05/12/2022 09:53:36 a. m.
+Fecha: 06/12/2022 09:42:56 a. m.
 Gramatica ST 
 : ST 
 cplusplus ST 
@@ -47,6 +47,7 @@ printf ST
 Cadena ST 
 \) PDerecho 
 ) ST 
+; ST 
 
  FinProduccion 
 Scanf ST 
@@ -70,7 +71,7 @@ ListaInstrucciones ST
 -> Produce 
 Instruccion ST 
 \( PIzquierdo 
-; ST 
+Main ST 
 ListaInstrucciones ST 
 \) PDerecho 
 
